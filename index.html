@@ -5,52 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MONTERROX | Global Watch Corporation</title>
     <style>
-        :root { --gold: #D4AF37; --dark: #0a0a0a; --bg: #000; --text: #eee; }
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; }
-        
-        /* Estilos Base */
-        .hero { height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 3px solid var(--gold); text-align: center; background: #000; }
-        .hero h1 { font-size: 5rem; color: var(--gold); margin: 0; letter-spacing: 10px; text-transform: uppercase; }
-        
-        nav { display: flex; justify-content: center; flex-wrap: wrap; padding: 15px; background: #050505; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--gold); }
-        button { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 20px; margin: 5px; cursor: pointer; text-transform: uppercase; font-weight: bold; transition: 0.3s; }
+        :root { --gold: #D4AF37; --bg: #050505; --card: #111; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #fff; margin: 0; }
+        .hero { padding: 60px 20px; text-align: center; border-bottom: 2px solid var(--gold); }
+        h1 { color: var(--gold); font-size: 3rem; margin: 0; letter-spacing: 5px; }
+        nav { display: flex; justify-content: center; gap: 10px; padding: 20px; position: sticky; top: 0; background: rgba(5,5,5,0.95); z-index: 100; border-bottom: 1px solid #333; }
+        button { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 20px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
         button:hover, .active { background: var(--gold); color: #000; }
-
-        .container { max-width: 1400px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 20px; }
-        
-        /* Tarjeta de Producto Profesional */
-        .card { background: #111; border: 1px solid #333; padding: 0; text-align: center; transition: 0.3s; display: flex; flex-direction: column; overflow: hidden; position: relative; }
-        .card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2); }
-        
-        .card-img-container { width: 100%; height: 250px; overflow: hidden; background: #050505; display: flex; justify-content: center; align-items: center; }
-        .card img { max-width: 100%; max-height: 100%; object-fit: contain; transition: 0.5s; }
-        .card:hover img { transform: scale(1.05); }
-        
-        .card-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .card h3 { font-size: 1.2rem; margin: 0 0 10px 0; color: #fff; letter-spacing: 1px; }
-        .card p { font-size: 0.9rem; color: #aaa; margin: 0 0 15px 0; line-height: 1.4; flex-grow: 1; }
-        
-        .btn-card { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px; width: 100%; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
-        .btn-card:hover { background: var(--gold); color: #000; }
-
-        /* Modal (La pestaña de características) */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .modal-content { background: #1a1a1a; padding: 40px; border: 2px solid var(--gold); max-width: 500px; width: 90%; color: #fff; position: relative; text-align: left; }
-        .close-btn { position: absolute; top: 10px; right: 20px; font-size: 30px; color: var(--gold); cursor: pointer; }
-        .modal h2 { margin-top: 0; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; }
-        .modal ul { list-style: none; padding: 0; margin: 20px 0; line-height: 2; }
-        .modal li::before { content: "✓ "; color: var(--gold); }
+        .container { max-width: 1200px; margin: 30px auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 0 20px; }
+        .card { background: var(--card); border: 1px solid #333; transition: 0.3s; padding: 15px; text-align: center; }
+        .card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .card img { width: 100%; height: 200px; object-fit: cover; background: #000; }
+        .btn-detalles { margin-top: 15px; width: 100%; padding: 10px; background: transparent; color: var(--gold); border: 1px solid var(--gold); cursor: pointer; }
+        .btn-detalles:hover { background: var(--gold); color: #000; }
+        /* Modal */
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 200; align-items: center; justify-content: center; }
+        .content { background: #1a1a1a; padding: 30px; border: 1px solid var(--gold); width: 400px; text-align: center; }
     </style>
 </head>
 <body>
 
-    <header class="hero">
-        <h1>MONTERROX</h1>
-        <p>GLOBAL WATCH CORPORATION | PRECISION & LUXURY</p>
-    </header>
+    <div class="hero"><h1>MONTERROX</h1><p>GLOBAL COLLECTION</p></div>
 
-    <nav id="nav">
-        <button onclick="filter('all')" class="active">Todos</button>
+    <nav id="menu">
+        <button onclick="filter('novedades')">Novedades</button>
         <button onclick="filter('exclusivo')">Exclusivos</button>
         <button onclick="filter('limitada')">Limitada</button>
         <button onclick="filter('oferta')">Ofertas</button>
@@ -59,77 +37,71 @@
 
     <main id="grid" class="container"></main>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="m-title"></h2>
-            <p id="m-desc" style="font-style: italic; color: #aaa;"></p>
-            <hr style="border-color: #333;">
-            <ul id="m-features"></ul>
-            <button class="btn-card" onclick="alert('Monterrox Global: Solicitud de adquisición registrada.')">ADQUIRIR PIEZA</button>
+    <div id="modal" class="modal" onclick="closeModal()">
+        <div class="content" onclick="event.stopPropagation()">
+            <h2 id="m-title" style="color:var(--gold)"></h2>
+            <p id="m-desc"></p>
+            <button onclick="closeModal()">CERRAR</button>
         </div>
     </div>
 
     <script>
-        // BASE DE DATOS REAL (Imágenes reales y descripciones únicas)
-        const watches = [
-            // --- EXCLUSIVOS (Alta Gama Real) ---
-            { id: 1, name: "Monterrox Gold Royal", cat: "exclusivo", desc: "La cima del lujo. Oro macizo de 18k con movimiento Tourbillon visto.", img: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=600", features: ["Material: Oro 18k", "Cristal: Zafiro Irrompible", "Movimiento: Automático Suizo COSC", "Sumergible: 100m"] },
-            { id: 2, name: "Chronos Noir Elite", cat: "exclusivo", desc: "Elegancia oscura y táctica. Caja de cerámica negra mate y esfera esqueletizada.", img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b92ad?q=80&w=600", features: ["Material: Cerámica", "Cristal: Zafiro Antirreflejos", "Movimiento: Automático", "Esfera: Esqueletizada"] },
-            { id: 3, name: "Classic Roman Heritage", cat: "exclusivo", desc: "Diseño atemporal. Números romanos y caja ultra-fina chapada en platino.", img: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?q=80&w=600", features: ["Material: Platino", "Cristal: Zafiro", "Movimiento: Cuarzo Alta Precisión", "Garantía: 10 Años"] },
-
-            // --- EDICIÓN LIMITADA (Real) ---
-            { id: 4, name: "Aqua-Master Mil-Spec", cat: "limitada", desc: "Edición militar numerada. Diver profesional de titanio grado 5.", img: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=600", features: ["Edición: 50 unidades", "Material: Titanio Grado 5", "Movimiento: Automático Valjoux", "Sumergible: 1000m"] },
-            { id: 5, name: "Meteorite Dial X", cat: "limitada", desc: "Esfera cortada de un meteorito real. Cada pieza es única.", img: "https://images.unsplash.com/photo-1614115167098-904c9977874a?q=80&w=600", features: ["Edición: 200 unidades", "Esfera: Meteorito Gibeon", "Material: Acero 316L", "Movimiento: Suizo"] },
-
-            // --- OFERTAS (Real) ---
-            { id: 6, name: "Speed Chrono Pro", cat: "oferta", desc: "Cronógrafo deportivo versátil. Alta precisión a un precio imbatible.", img: "https://images.unsplash.com/photo-1508685096489-7aac823bd3b8?q=80&w=600", features: ["Material: Acero", "Cristal: Mineral Endurecido", "Movimiento: Cuarzo Japonés", "Funciones: Cronógrafo"] },
-            { id: 7, name: "Urban Minimalist", cat: "oferta", desc: "Diseño limpio y moderno. Perfecto para el día a día en la ciudad.", img: "https://images.unsplash.com/photo-1509048196583-1d07c0f1b635?q=80&w=600", features: ["Material: Acero PVD", "Peso: 60g", "Movimiento: Cuarzo", "Correa: Cuero Italiano"] },
-
-            // --- COMEDIA (Graciosos y Absurdos con imágenes reales) ---
-            { id: 8, name: "El Emperador Invisible", cat: "comedia", desc: "Tan exclusivo que no existe. Ideal para minimalistas extremos.", img: "https://images.unsplash.com/photo-1606825595861-1250b73c9103?q=80&w=600", features: ["Material: Puro Aire", "Cristal: No tiene", "Movimiento: Telepático", "Garantía: Si lo ves, te lo damos"] },
-            { id: 9, name: "Reloj de Arena Digital", cat: "comedia", desc: "La tecnología del siglo XV se une a la del XXI. Funciona si lo giras.", img: "https://images.unsplash.com/photo-1587836374828-4dbafa94f0e0?q=80&w=600", features: ["Material: Vidrio", "Energía: Gravedad", "Precisión: Según la arena", "Batería: Infinita (o casi)"] },
-            { id: 10, name: "Comedia: Llegas Tarde", cat: "comedia", desc: "Siempre marca 15 minutos más. Ideal para procrastinadores profesionales.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600", features: ["Caja: Plástico Barato", "Manecillas: Van más rápido", "Garantía: Llegas tarde igual", "Peso: Ligero (como tu puntualidad)"] },
-            { id: 11, name: "Reloj 'Pizza-Time'", cat: "comedia", desc: "La manecilla es una porción de pizza. Solo marca la hora de comer.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600", features: ["Material: Queso Mozzarella", "Movimiento: Hambre", "Sumergible: En salsa de tomate", "Cristal: Aceitoso"] }
+        // URLs de imágenes reales de relojes (Unsplash de alta calidad)
+        const watchImages = [
+            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=400",
+            "https://images.unsplash.com/photo-1524805611974-575be7b7e3c5?q=80&w=400",
+            "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?q=80&w=400",
+            "https://images.unsplash.com/photo-1614115167098-904c9977874a?q=80&w=400",
+            "https://images.unsplash.com/photo-1612817159949-180bbc455799?q=80&w=400"
         ];
+
+        const watches = [];
+        const cats = ['novedades', 'exclusivo', 'limitada', 'oferta', 'comedia'];
+        
+        // Generador de 75 relojes (15 por cada categoría)
+        cats.forEach(cat => {
+            for(let i = 1; i <= 15; i++) {
+                let name = `${cat.charAt(0).toUpperCase() + cat.slice(1)} Modelo ${i}`;
+                let desc = `Reloj de precisión con acabado premium y materiales de alta calidad.`;
+                let img = watchImages[i % watchImages.length];
+
+                // Lógica especial para Comedia
+                if(cat === 'comedia') {
+                    const chistes = ["Reloj de Arena Digital", "Reloj 'Llegas Tarde'", "Reloj de Pizza", "Reloj Invisible", "Reloj con manecillas de espagueti"];
+                    name = chistes[i % chistes.length];
+                    desc = "Diseño absurdo. No intentes consultar la hora, solo disfruta del caos.";
+                    img = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400"; // Imagen minimalista/rara
+                }
+
+                watches.push({ id: watches.length + 1, name, cat, desc, img });
+            }
+        });
 
         function render(list) {
             document.getElementById('grid').innerHTML = list.map(w => `
                 <div class="card">
-                    <div class="card-img-container">
-                        <img src="${w.img}" alt="${w.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600';">
-                    </div>
-                    <div class="card-info">
-                        <h3>${w.name}</h3>
-                        <p class="desc">${w.desc}</p>
-                        <button class="btn-card" onclick="openModal(${w.id})">VER DETALLES</button>
-                    </div>
+                    <img src="${w.img}" alt="Watch">
+                    <h3>${w.name}</h3>
+                    <button class="btn-detalles" onclick="openModal(${w.id})">DETALLES</button>
                 </div>
             `).join('');
+        }
+
+        function filter(cat) {
+            render(watches.filter(w => w.cat === cat));
         }
 
         function openModal(id) {
             const w = watches.find(item => item.id === id);
             document.getElementById('m-title').innerText = w.name;
             document.getElementById('m-desc').innerText = w.desc;
-            document.getElementById('m-features').innerHTML = w.features.map(f => `<li>${f}</li>`).join('');
             document.getElementById('modal').style.display = 'flex';
         }
 
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
-        
-        function filter(cat) {
-            // Actualizar botones activos
-            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-            document.querySelector(`nav button[onclick*="${cat}"]`).classList.add('active');
-
-            // Filtrar y mostrar
-            if (cat === 'all') return render(watches);
-            render(watches.filter(w => w.cat === cat));
-        }
 
         // Carga inicial
-        render(watches);
+        render(watches.filter(w => w.cat === 'novedades'));
     </script>
 </body>
 </html>
