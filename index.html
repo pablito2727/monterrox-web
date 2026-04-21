@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monterrox | Compra y Venta</title>
+    <style>
+        /* CSS Integrado */
+        body { font-family: 'Segoe UI', sans-serif; background-color: #0f0f0f; color: #d4af37; margin: 0; padding: 0; text-align: center; }
+        header { padding: 40px; border-bottom: 2px solid #d4af37; }
+        h1 { font-size: 3rem; letter-spacing: 5px; margin: 0; }
+        nav { padding: 20px; }
+        button { background: #d4af37; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; border-radius: 4px; transition: 0.3s; }
+        button:hover { background: #fff; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 40px; }
+        .card { background: #1a1a1a; padding: 20px; border: 1px solid #333; border-radius: 8px; transition: 0.3s; }
+        .card:hover { border-color: #d4af37; transform: translateY(-5px); }
+        .price { font-size: 1.5rem; font-weight: bold; color: #fff; margin: 15px 0; }
+        .desc { font-size: 0.9rem; color: #aaa; margin-bottom: 15px; }
+        footer { padding: 20px; border-top: 2px solid #d4af37; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>MONTERROX</h1>
+        <p>Tu destino exclusivo en compra y venta de relojería.</p>
+    </header>
+
+    <nav>
+        <button onclick="filterWatches('all')">Ver Todos</button>
+        <button onclick="filterWatches('premium')">Premium</button>
+        <button onclick="filterWatches('broma')">Edición Humor</button>
+    </nav>
+
+    <main id="product-grid" class="grid-container">
+        </main>
+
+    <footer>
+        <p>&copy; 2026 Monterrox. Compra y venta segura.</p>
+    </footer>
+
+    <script>
+        /* JavaScript Integrado */
+        const watches = [
+            { name: "Reloj Guess", price: 250, desc: "39-42 mm, Acabado dorado de lujo.", category: "premium" },
+            { name: "Seiko Chronograph 7T32", price: 110, desc: "Calibre Automático, Acero inoxidable, Negro.", category: "premium" },
+            { name: "Rolex Submariner Gold", price: 5200, desc: "Edición limitada, oro 18k.", category: "premium" },
+            { name: "Reloj de Arena Digital", price: 15, desc: "Edición de broma: Solo funciona si lo giras.", category: "broma" },
+            { name: "Reloj con Manecillas de Pizza", price: 20, desc: "Edición de broma: Sabe a pepperoni.", category: "broma" },
+            { name: "Reloj que dice 'Tarde'", price: 10, desc: "Edición de broma: Siempre te dice que llegaste tarde.", category: "broma" }
+        ];
+
+        function displayWatches(list) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            list.forEach(w => {
+                grid.innerHTML += `
+                    <div class="card">
+                        <h3>${w.name}</h3>
+                        <p class="desc">${w.desc}</p>
+                        <div class="price">${w.price} €</div>
+                        <button onclick="alert('Contacto con Monterrox: ¡Hola! Me interesa el ${w.name}')">Comprar</button>
+                    </div>
+                `;
+            });
+        }
+
+        function filterWatches(cat) {
+            if (cat === 'all') return displayWatches(watches);
+            const filtered = watches.filter(w => w.category === cat);
+            displayWatches(filtered);
+        }
+
+        // Inicializar vista
+        displayWatches(watches);
+    </script>
+</body>
+</html>
