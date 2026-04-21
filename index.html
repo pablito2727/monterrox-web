@@ -3,77 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monterrox | Compra y Venta</title>
+    <title>MONTERROX | Lujo y Vanguardia</title>
     <style>
-        /* CSS Integrado */
-        body { font-family: 'Segoe UI', sans-serif; background-color: #0f0f0f; color: #d4af37; margin: 0; padding: 0; text-align: center; }
-        header { padding: 40px; border-bottom: 2px solid #d4af37; }
-        h1 { font-size: 3rem; letter-spacing: 5px; margin: 0; }
-        nav { padding: 20px; }
-        button { background: #d4af37; border: none; padding: 10px 20px; margin: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; border-radius: 4px; transition: 0.3s; }
-        button:hover { background: #fff; }
-        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 40px; }
-        .card { background: #1a1a1a; padding: 20px; border: 1px solid #333; border-radius: 8px; transition: 0.3s; }
-        .card:hover { border-color: #d4af37; transform: translateY(-5px); }
-        .price { font-size: 1.5rem; font-weight: bold; color: #fff; margin: 15px 0; }
-        .desc { font-size: 0.9rem; color: #aaa; margin-bottom: 15px; }
-        footer { padding: 20px; border-top: 2px solid #d4af37; margin-top: 40px; }
+        /* Estilos Premium */
+        :root { --gold: #D4AF37; --dark: #0a0a0a; --bg: #000000; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: var(--bg); color: #fff; margin: 0; }
+        
+        /* Hero Section */
+        .hero { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2000'); background-size: cover; text-align: center; border-bottom: 3px solid var(--gold); }
+        .hero h1 { font-size: 5rem; margin: 0; color: var(--gold); letter-spacing: 10px; }
+        .hero p { font-size: 1.5rem; letter-spacing: 2px; }
+
+        /* Navegación */
+        nav { display: flex; justify-content: center; padding: 20px; background: var(--dark); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--gold); }
+        button { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 20px; margin: 0 10px; cursor: pointer; transition: 0.4s; font-weight: bold; text-transform: uppercase; }
+        button:hover { background: var(--gold); color: black; }
+
+        /* Grid de Productos */
+        .container { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 0 20px; }
+        .card { background: #121212; border: 1px solid #333; padding: 20px; text-align: center; transition: 0.3s; }
+        .card:hover { border-color: var(--gold); transform: translateY(-10px); }
+        .card img { width: 100%; height: 250px; object-fit: cover; margin-bottom: 15px; border: 1px solid #222; }
+        .price { font-size: 1.8rem; color: var(--gold); font-weight: bold; margin: 10px 0; }
+        .cat-tag { font-size: 0.7rem; background: #333; padding: 3px 8px; border-radius: 10px; color: #aaa; }
+
+        footer { text-align: center; padding: 50px; border-top: 1px solid var(--gold); margin-top: 50px; color: #555; }
     </style>
 </head>
 <body>
 
-    <header>
+    <header class="hero">
         <h1>MONTERROX</h1>
-        <p>Tu destino exclusivo en compra y venta de relojería.</p>
+        <p>EL TIEMPO ES TU MAYOR ACTIVO</p>
     </header>
 
     <nav>
-        <button onclick="filterWatches('all')">Ver Todos</button>
-        <button onclick="filterWatches('premium')">Premium</button>
-        <button onclick="filterWatches('broma')">Edición Humor</button>
+        <button onclick="filterWatches('all')">Todos</button>
+        <button onclick="filterWatches('exclusivo')">Exclusivos</button>
+        <button onclick="filterWatches('limitada')">Ed. Limitada</button>
+        <button onclick="filterWatches('oferta')">Ofertas</button>
+        <button onclick="filterWatches('comedia')">Comedia</button>
     </nav>
 
-    <main id="product-grid" class="grid-container">
-        </main>
+    <main id="product-grid" class="container"></main>
 
     <footer>
-        <p>&copy; 2026 Monterrox. Compra y venta segura.</p>
+        <p>&copy; 2026 MONTERROX - Distribución Global. La excelencia no espera.</p>
     </footer>
 
     <script>
-        /* JavaScript Integrado */
         const watches = [
-            { name: "Reloj Guess", price: 250, desc: "39-42 mm, Acabado dorado de lujo.", category: "premium" },
-            { name: "Seiko Chronograph 7T32", price: 110, desc: "Calibre Automático, Acero inoxidable, Negro.", category: "premium" },
-            { name: "Rolex Submariner Gold", price: 5200, desc: "Edición limitada, oro 18k.", category: "premium" },
-            { name: "Reloj de Arena Digital", price: 15, desc: "Edición de broma: Solo funciona si lo giras.", category: "broma" },
-            { name: "Reloj con Manecillas de Pizza", price: 20, desc: "Edición de broma: Sabe a pepperoni.", category: "broma" },
-            { name: "Reloj que dice 'Tarde'", price: 10, desc: "Edición de broma: Siempre te dice que llegaste tarde.", category: "broma" }
+            { name: "Monterrox Gold Royal", price: 4500, cat: "exclusivo", desc: "Oro 18k, cristal de zafiro.", img: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=500" },
+            { name: "Seiko Pro-Tech", price: 890, cat: "exclusivo", desc: "Precisión japonesa absoluta.", img: "https://images.unsplash.com/photo-1585123334904-845ecd658d55?q=80&w=500" },
+            { name: "Chronos Noir", price: 299, cat: "oferta", desc: "Elegancia oscura, 50% descuento.", img: "https://images.unsplash.com/photo-1508685096489-7aac823bd3b8?q=80&w=500" },
+            { name: "Titanium X-1", price: 1200, cat: "limitada", desc: "Solo 50 unidades fabricadas.", img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b92ad?q=80&w=500" },
+            { name: "Reloj de Arena Digital", price: 15, cat: "comedia", desc: "Tecnología punta del siglo XV.", img: "https://images.unsplash.com/photo-1587836374828-4dbafa94f0e0?q=80&w=500" },
+            { name: "Reloj 'Llegas Tarde'", price: 5, cat: "comedia", desc: "Siempre marca 5 minutos más.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=500" },
+            { name: "Midnight Skeleton", price: 2100, cat: "limitada", desc: "Mecanismo visto al desnudo.", img: "https://images.unsplash.com/photo-1612817159949-180bbc455799?q=80&w=500" },
+            { name: "Vintage Quartz", price: 80, cat: "oferta", desc: "Clásico renovado en oferta.", img: "https://images.unsplash.com/photo-1526045437500-205d15a31a54?q=80&w=500" },
+            { name: "El Emperador Invisible", price: 5000, cat: "comedia", desc: "Tan exclusivo que no lo ves.", img: "https://images.unsplash.com/photo-1606825595861-1250b73c9103?q=80&w=500" }
         ];
 
-        function displayWatches(list) {
+        function display(list) {
             const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-            list.forEach(w => {
-                grid.innerHTML += `
-                    <div class="card">
-                        <h3>${w.name}</h3>
-                        <p class="desc">${w.desc}</p>
-                        <div class="price">${w.price} €</div>
-                        <button onclick="alert('Contacto con Monterrox: ¡Hola! Me interesa el ${w.name}')">Comprar</button>
-                    </div>
-                `;
-            });
+            grid.innerHTML = list.map(w => `
+                <div class="card">
+                    <img src="${w.img}" alt="${w.name}">
+                    <span class="cat-tag">${w.cat.toUpperCase()}</span>
+                    <h3>${w.name}</h3>
+                    <p>${w.desc}</p>
+                    <div class="price">${w.price} €</div>
+                    <button onclick="alert('Monterrox: Compra procesada')">Adquirir</button>
+                </div>
+            `).join('');
         }
 
         function filterWatches(cat) {
-            if (cat === 'all') return displayWatches(watches);
-            const filtered = watches.filter(w => w.category === cat);
-            displayWatches(filtered);
+            if (cat === 'all') return display(watches);
+            display(watches.filter(w => w.cat === cat));
         }
 
-        // Inicializar vista
-        displayWatches(watches);
+        display(watches);
     </script>
 </body>
 </html>
