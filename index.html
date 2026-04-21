@@ -3,96 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MONTERROX | Global Watch Corporation</title>
+    <title>MONTERROX | Global Corp</title>
     <style>
-        :root { --gold: #D4AF37; --dark: #0a0a0a; --text: #eee; }
-        body { font-family: 'Helvetica Neue', Helvetica, sans-serif; background-color: #000; color: var(--text); margin: 0; }
+        :root { --gold: #D4AF37; --dark: #050505; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #000; color: #eee; margin: 0; }
         
-        /* Header */
-        .hero { height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 2px solid var(--gold); text-align: center; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)); }
-        .hero h1 { font-size: 4rem; color: var(--gold); margin: 0; letter-spacing: 5px; }
-
-        /* Navegación */
-        nav { display: flex; justify-content: center; padding: 20px; background: #050505; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; }
-        button { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 20px; margin: 5px; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-weight: bold; }
+        /* Estilos Corporativos */
+        .hero { height: 30vh; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 3px solid var(--gold); text-align: center; background: #000; }
+        .hero h1 { font-size: 3.5rem; color: var(--gold); margin: 0; letter-spacing: 8px; }
+        
+        nav { display: flex; justify-content: center; padding: 15px; background: #111; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; gap: 10px; }
+        button { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 8px 15px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
         button:hover, button.active { background: var(--gold); color: #000; }
 
-        /* Grid */
-        .container { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; padding: 20px; }
-        .card { background: #111; border: 1px solid #333; padding: 15px; text-align: center; transition: 0.3s; }
-        .card img { width: 100%; height: 200px; object-fit: cover; margin-bottom: 15px; }
+        .container { max-width: 1400px; margin: 20px auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px; }
+        .card { background: #151515; border: 1px solid #333; padding: 10px; text-align: center; transition: 0.2s; }
+        .card img { width: 100%; height: 180px; object-fit: cover; background: #222; }
         .card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .buy-btn { background: var(--gold); color: #000; border: none; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-detalles { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 8px; width: 100%; margin-top: 10px; cursor: pointer; }
+        .btn-detalles:hover { background: var(--gold); color: #000; }
 
         /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-content { background: #1a1a1a; padding: 30px; border: 1px solid var(--gold); max-width: 500px; width: 90%; color: #fff; position: relative; }
-        .close-btn { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 24px; color: var(--gold); }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: #1a1a1a; padding: 30px; border: 2px solid var(--gold); max-width: 400px; width: 90%; text-align: center; position: relative; }
+        .close { position: absolute; top: 10px; right: 15px; cursor: pointer; color: var(--gold); font-size: 24px; }
     </style>
 </head>
 <body>
 
     <header class="hero">
         <h1>MONTERROX</h1>
-        <p>EXCELENCIA Y PRECISIÓN GLOBAL</p>
+        <p>GLOBAL PRECISION TIMEKEEPING</p>
     </header>
 
-    <nav id="nav">
-        <button onclick="filter('all')">Todos</button>
+    <nav>
+        <button onclick="render(watches)">Todos</button>
         <button onclick="filter('exclusivo')">Exclusivos</button>
-        <button onclick="filter('limitada')">Limitada</button>
+        <button onclick="filter('limitada')">Limitados</button>
         <button onclick="filter('oferta')">Ofertas</button>
+        <button onclick="filter('comedia')">Comedia</button>
     </nav>
 
     <main id="grid" class="container"></main>
 
     <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <span class="close" onclick="closeModal()">&times;</span>
             <h2 id="m-title" style="color:var(--gold)"></h2>
             <p id="m-desc"></p>
-            <ul id="m-features"></ul>
-            <button class="buy-btn" onclick="alert('Pedido procesado exitosamente.')">COMPRAR AHORA</button>
+            <ul id="m-features" style="list-style: none; padding: 0;"></ul>
+            <button class="btn-detalles" onclick="alert('Pedido procesado.')">ADQUIRIR</button>
         </div>
     </div>
 
     <script>
-        const watches = [
-            { id: 1, name: "Gold Royal", price: 4500, cat: "exclusivo", desc: "El estándar de oro.", feat: ["Material: Oro 18k", "Cristal: Zafiro", "Movimiento: Suizo"] },
-            { id: 2, name: "Titanium Pro", price: 1200, cat: "exclusivo", desc: "Resistencia absoluta.", feat: ["Material: Titanio", "Peso: 80g", "Sumergible: 300m"] },
-            { id: 3, name: "Dark Night", price: 299, cat: "oferta", desc: "Diseño urbano oscuro.", feat: ["Material: Acero PVD", "Caja: 42mm", "Cuarzo"] },
-            { id: 4, name: "Aviator Elite", price: 950, cat: "limitada", desc: "Precisión de piloto.", feat: ["Cronógrafo", "Esfera: Carbono", "Edición: 50 unidades"] },
-            { id: 5, name: "Vintage 50s", price: 800, cat: "limitada", desc: "Clásico renovado.", feat: ["Correa: Piel auténtica", "Mecánico", "Garantía: 10 años"] },
-            { id: 6, name: "Solar Speed", price: 150, cat: "oferta", desc: "Carga eterna.", feat: ["Energía: Solar", "Brújula", "Digital"] }
-        ];
+        const watches = [];
+        const cats = ['exclusivo', 'limitada', 'oferta', 'comedia'];
+        const descriptions = ["Acabado en oro 18k", "Edición limitada militar", "Diseño ergonómico", "Tecnología de cuarzo suizo", "Estilo vintage años 50"];
+
+        // Generar 63 relojes con datos únicos
+        for(let i=1; i<=63; i++) {
+            watches.push({ 
+                id: i, 
+                name: `Monterrox Series ${100+i}`, 
+                cat: cats[i % 4], 
+                desc: descriptions[i % 5],
+                features: ["Cristal de Zafiro", "Resistente al agua", "Correa ajustable", "Garantía de 5 años"]
+            });
+        }
 
         function render(list) {
-            const grid = document.getElementById('grid');
-            grid.innerHTML = list.map((w, i) => `
+            document.getElementById('grid').innerHTML = list.map(w => `
                 <div class="card">
-                    <img src="https://picsum.photos/seed/${w.id}/400/400" alt="${w.name}">
-                    <h3>${w.name}</h3>
-                    <p>${w.price} €</p>
-                    <button class="buy-btn" onclick="openModal(${w.id})">VER DETALLES</button>
+                    <img src="https://picsum.photos/seed/${w.id}/400/400" alt="Reloj">
+                    <h4 style="margin: 10px 0;">${w.name}</h4>
+                    <button class="btn-detalles" onclick="openModal(${w.id})">DETALLES</button>
                 </div>
             `).join('');
+        }
+
+        function filter(cat) {
+            render(watches.filter(w => w.cat === cat));
         }
 
         function openModal(id) {
             const w = watches.find(item => item.id === id);
             document.getElementById('m-title').innerText = w.name;
             document.getElementById('m-desc').innerText = w.desc;
-            document.getElementById('m-features').innerHTML = w.feat.map(f => `<li>${f}</li>`).join('');
+            document.getElementById('m-features').innerHTML = w.features.map(f => `<li>${f}</li>`).join('');
             document.getElementById('modal').style.display = 'flex';
         }
 
         function closeModal() { document.getElementById('modal').style.display = 'none'; }
-        
-        function filter(cat) {
-            if(cat === 'all') render(watches);
-            else render(watches.filter(w => w.cat === cat));
-        }
 
+        // Carga inicial
         render(watches);
     </script>
 </body>
