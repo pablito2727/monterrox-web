@@ -3,101 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MONTERROX | Global Corp</title>
+    <title>MONTERROX | Global Watch Corporation</title>
     <style>
-        :root { --gold: #D4AF37; --dark: #050505; }
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #000; color: #eee; margin: 0; }
+        /* Estilos de Corporación de Lujo */
+        :root { --gold: #D4AF37; --dark: #0a0a0a; --bg: #000; --text: #eee; --card-bg: #111; }
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 0; overflow-x: hidden; }
         
-        /* Estilos Corporativos */
-        .hero { height: 30vh; display: flex; flex-direction: column; justify-content: center; align-items: center; border-bottom: 3px solid var(--gold); text-align: center; background: #000; }
-        .hero h1 { font-size: 3.5rem; color: var(--gold); margin: 0; letter-spacing: 8px; }
+        /* Hero Section - Anuncio de Marca */
+        .hero { height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=2000'); background-size: cover; background-position: center; text-align: center; border-bottom: 3px solid var(--gold); }
+        .hero h1 { font-size: 6rem; margin: 0; color: var(--gold); letter-spacing: 15px; text-transform: uppercase; font-weight: 900; }
+        .hero p { font-size: 1.8rem; letter-spacing: 3px; color: #ccc; margin-top: 10px; }
+        .hero-btn { margin-top: 30px; background: var(--gold); color: #000; border: none; padding: 15px 40px; font-size: 1.2rem; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .hero-btn:hover { background: #fff; transform: scale(1.05); }
+
+        /* Navegación Corporativa Sticky */
+        nav { display: flex; justify-content: center; flex-wrap: wrap; padding: 15px; background: rgba(10,10,10,0.95); position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--gold); backdrop-filter: blur(5px); }
+        nav button { background: transparent; border: 1px solid transparent; color: var(--gold); padding: 10px 25px; margin: 5px; cursor: pointer; transition: 0.4s; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; }
+        nav button:hover, nav button.active { border-color: var(--gold); background: rgba(212, 175, 55, 0.1); }
+
+        /* Sección de Título de Categoría */
+        .category-header { text-align: center; padding: 40px 0 20px 0; background: #050505; border-bottom: 1px solid #222; }
+        .category-header h2 { font-size: 2.5rem; color: #fff; text-transform: uppercase; letter-spacing: 5px; margin: 0; }
+        .category-header p { color: #888; margin: 10px 0 0 0; }
+
+        /* Grid Masivo de Productos */
+        .container { max-width: 1400px; margin: 0 auto 50px auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; padding: 20px; }
         
-        nav { display: flex; justify-content: center; padding: 15px; background: #111; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; gap: 10px; }
-        button { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 8px 15px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
-        button:hover, button.active { background: var(--gold); color: #000; }
+        /* Tarjeta de Producto Profesional */
+        .card { background: var(--card-bg); border: 1px solid #222; padding: 0; text-align: center; transition: 0.4s; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        .card:hover { border-color: var(--gold); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1); }
+        
+        .card-img-container { width: 100%; height: 250px; overflow: hidden; background: #050505; display: flex; justify-content: center; align-items: center; }
+        .card img { max-width: 100%; max-height: 100%; object-fit: contain; transition: 0.5s; filter: grayscale(20%); }
+        .card:hover img { transform: scale(1.1); filter: grayscale(0%); }
+        
+        .card-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card h3 { font-size: 1.2rem; margin: 0 0 10px 0; color: #fff; letter-spacing: 1px; }
+        .card p { font-size: 0.9rem; color: #aaa; margin: 0 0 15px 0; line-height: 1.4; flex-grow: 1; }
+        
+        .price-container { display: flex; justify-content: center; align-items: baseline; margin-bottom: 15px; }
+        .price { font-size: 1.8rem; color: var(--gold); font-weight: bold; }
+        .old-price { font-size: 1.1rem; color: #666; text-decoration: line-through; margin-right: 10px; }
+        
+        .card-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 12px; width: 100%; font-weight: bold; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .card-btn:hover { background: var(--gold); color: #000; }
+        
+        /* Etiquetas de Categoría */
+        .cat-tag { position: absolute; top: 15px; right: 15px; font-size: 0.65rem; background: rgba(0,0,0,0.8); border: 1px solid var(--gold); padding: 4px 10px; border-radius: 2px; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; font-weight: bold; z-index: 10; }
+        .cat-tag.oferta { border-color: #ff4444; color: #ff4444; }
+        .cat-tag.limitada { border-color: #00e676; color: #00e676; }
 
-        .container { max-width: 1400px; margin: 20px auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 15px; }
-        .card { background: #151515; border: 1px solid #333; padding: 10px; text-align: center; transition: 0.2s; }
-        .card img { width: 100%; height: 180px; object-fit: cover; background: #222; }
-        .card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .btn-detalles { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 8px; width: 100%; margin-top: 10px; cursor: pointer; }
-        .btn-detalles:hover { background: var(--gold); color: #000; }
-
-        /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-content { background: #1a1a1a; padding: 30px; border: 2px solid var(--gold); max-width: 400px; width: 90%; text-align: center; position: relative; }
-        .close { position: absolute; top: 10px; right: 15px; cursor: pointer; color: var(--gold); font-size: 24px; }
+        /* Footer Corporativo */
+        footer { text-align: center; padding: 80px 20px; border-top: 1px solid #222; background: #050505; color: #666; font-size: 0.9rem; }
+        footer h3 { color: var(--gold); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; }
+        footer p { max-width: 600px; margin: 0 auto 20px auto; line-height: 1.6; }
+    }
     </style>
 </head>
 <body>
 
     <header class="hero">
         <h1>MONTERROX</h1>
-        <p>GLOBAL PRECISION TIMEKEEPING</p>
+        <p>THE GLOBAL STANDARD IN PRECISION TIMEKEEPING</p>
+        <button class="hero-btn" onclick="document.getElementById('nav').scrollIntoView({behavior: 'smooth'})">Explorar Catálogo</button>
     </header>
 
-    <nav>
-        <button onclick="render(watches)">Todos</button>
-        <button onclick="filter('exclusivo')">Exclusivos</button>
-        <button onclick="filter('limitada')">Limitados</button>
-        <button onclick="filter('oferta')">Ofertas</button>
-        <button onclick="filter('comedia')">Comedia</button>
+    <nav id="nav">
+        <button onclick="filterWatches('all')" class="active">Ver Todo</button>
+        <button onclick="filterWatches('novedades')">Novedades</button>
+        <button onclick="filterWatches('exclusivo')">Colección Exclusiva</button>
+        <button onclick="filterWatches('limitada')">Ediciones Limitadas</button>
+        <button onclick="filterWatches('oferta')">Grandes Ofertas</button>
+        <button onclick="filterWatches('comedia')">Edición Humor</button>
     </nav>
 
-    <main id="grid" class="container"></main>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="m-title" style="color:var(--gold)"></h2>
-            <p id="m-desc"></p>
-            <ul id="m-features" style="list-style: none; padding: 0;"></ul>
-            <button class="btn-detalles" onclick="alert('Pedido procesado.')">ADQUIRIR</button>
-        </div>
+    <div class="category-header">
+        <h2 id="category-title">Catálogo Completo</h2>
+        <p id="category-desc">Explora nuestra colección global de más de 60 modelos de vanguardia.</p>
     </div>
 
+    <main id="product-grid" class="container">
+        </main>
+
+    <footer>
+        <h3>MONTERROX CORPORATION</h3>
+        <p>Líderes mundiales en distribución y tasación de alta relojería. Con presencia en más de 120 países, garantizamos autenticidad y excelencia en cada pieza.</p>
+        <p>&copy; 2026 MONTERROX Global Wealth Management. Todos los derechos reservados.</p>
+    </footer>
+
     <script>
-        const watches = [];
-        const cats = ['exclusivo', 'limitada', 'oferta', 'comedia'];
-        const descriptions = ["Acabado en oro 18k", "Edición limitada militar", "Diseño ergonómico", "Tecnología de cuarzo suizo", "Estilo vintage años 50"];
+        // BASE DE DATOS MASIVA DE RELOJES (Más de 60 modelos)
+        const watches = [
+            // --- NOVEDADES (12 modelos) ---
+            { id: 1, name: "Aqua-Master Professional", price: 1250, cat: "novedades", desc: "Diver 300m, bisel cerámico, movimiento automático.", img: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=400" },
+            { id: 2, name: "Chronos Aviator GMT", price: 980, cat: "novedades", desc: "Doble huso horario, caja de titanio de 44mm.", img: "https://images.unsplash.com/photo-1524805611974-575be7b7e3c5?q=80&w=400" },
+            { id: 3, name: "Luna-Phase Elegance", price: 1890, cat: "novedades", desc: "Complicación de fase lunar, esfera de meteorito.", img: "https://images.unsplash.com/photo-1614115167098-904c9977874a?q=80&w=400" },
+            { id: 4, name: "Urban Kinetic Drive", price: 450, cat: "novedades", desc: "Tecnología híbrida, reserva de marcha de 6 meses.", img: "https://images.unsplash.com/photo-1508685096489-7aac823bd3b8?q=80&w=400" },
+            { id: 5, name: "Terra-Graph Chrono", price: 720, cat: "novedades", desc: "Cronógrafo deportivo, correa de caucho FKM.", img: "https://images.unsplash.com/photo-1612817159949-180bbc455799?q=80&w=400" },
+            { id: 6, name: "Solar-Charge Adventure", price: 310, cat: "novedades", desc: "Carga solar infinita, brújula digital integrada.", img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=400" },
+            { id: 7, name: "Oceanic Deep Diver", price: 1400, cat: "novedades", desc: "Válvula de helio, sumergible hasta 1000m.", img: "https://images.unsplash.com/photo-1619231641324-a21c43152668?q=80&w=400" },
+            { id: 8, name: "Classic Roman Dial", price: 550, cat: "novedades", desc: "Caja ultra-fina, números romanos, diseño atemporal.", img: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?q=80&w=400" },
+            { id: 9, name: "Racing Spirit GT", price: 880, cat: "novedades", desc: "Inspirado en el automovilismo, esfera de fibra de carbono.", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=400" },
+            { id: 10, name: "Stealth Blackout", price: 610, cat: "novedades", desc: "Tratamiento PVD negro mate, índices luminiscentes negros.", img: "https://images.unsplash.com/photo-1611095973362-88e8e2557e58?q=80&w=400" },
+            { id: 11, name: "Rose Gold Heritage", price: 1650, cat: "novedades", desc: "Oro rosa de 18k, movimiento suizo certificado COSC.", img: "https://images.unsplash.com/photo-1612817159949-180bbc455799?q=80&w=400" },
+            { id: 12, name: "Field Force Military", price: 390, cat: "novedades", desc: "Resistente a impactos, correa de NATO verde oliva.", img: "https://images.unsplash.com/photo-1509048196583-1d07c0f1b635?q=80&w=400" },
 
-        // Generar 63 relojes con datos únicos
-        for(let i=1; i<=63; i++) {
-            watches.push({ 
-                id: i, 
-                name: `Monterrox Series ${100+i}`, 
-                cat: cats[i % 4], 
-                desc: descriptions[i % 5],
-                features: ["Cristal de Zafiro", "Resistente al agua", "Correa ajustable", "Garantía de 5 años"]
-            });
+            // --- EXCLUSIVO (12 modelos) ---
+            { id: 13, name: "Monterrox Gold Royal", price: 12500, cat: "exclusivo", desc: "Oro macizo 18k, cristal de zafiro irrompible.", img: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=400" },
+            { id: 14, name: "Diamond Tourbillon", price: 45000, cat: "exclusivo", desc: "Mecanismo Tourbillon visto, 110 diamantes incrustados.", img: "https://images.unsplash.com/photo-1639148719213-9a4f4d547f4f?q=80&w=400" },
+            { id: 15, name: "Platinum Masterpiece", price: 32000, cat: "exclusivo", desc: "Caja de platino puro, dial de ónix negro.", img: "https://images.unsplash.com/photo-1612817159949-180bbc455799?q=80&w=400" },
+            { id: 16, name: "Azure Blue Perpetual", price: 8900, cat: "exclusivo", desc: "Calendario perpetuo hasta el año 2100.", img: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=400" },
+            { id: 17, name: "Meteorite Dial X", price: 15500, cat: "exclusivo", desc: "Esfera cortada de un meteorito real.", img: "https://images.unsplash.com/photo-1614115167098-904c9977874a?q=80&w=400" },
+            { id: 18, name: "Skeleton Gold Tech", price: 19800, cat: "exclusivo", desc: "Arquitectura esqueletizada chapada en oro de 24k.", img: "https://images.unsplash.com/photo-1639148719213-9a4f4d547f4f?q=80&w=400" },
+            { id: 19, name: "Legacy Repeater", price: 28000, cat: "exclusivo", desc: "Complicación de repetición de minutos (suena la hora).", img: "https://images.unsplash.com/photo-1612817159949-180bbc455799?q=80&w=400" },
+            { id: 20, name: "Obsidian Deep Sea", price: 7200, cat: "exclusivo", desc: "Caja de cerámica de circonio, resistente a 3000m.", img: "https://images.unsplash.com/photo-1619231641324-a21c43152668?q=80&w=400" },
+            { id: 21, name: "Emerald Luxe Chrono", price: 11000, cat: "exclusivo", desc: "Bisel con esmeraldas naturales, cronógrafo automático.", img: "https://images.unsplash.com/photo-1612817159949-180bbc455799?q=80&w=400" },
+            { id: 22, name: "Titanium Force G2", price: 6500, cat: "exclusivo", desc: "Movimiento de súper precisión, caja de titanio de grado 5.", img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b92ad?q=80&w=400" },
+            { id: 23, name: "Vintage Gold Heritage", price: 9500, cat: "exclusivo", desc: "Diseño clásico de los años 50 en oro rosa.", img: "https://images.unsplash.com/photo-1526045437500-205d15a31a54?q=80&w=400" },
+            { id: 24, name: "Galactic Starwheel", price: 21000, cat: "exclusivo", desc: "Visualización de la hora mediante discos rotatorios.", img: "https://images.unsplash.com/photo-1639148719213-9a4f4d547f4f?q=80&w=400" },
+
+            // --- OFERTAS (15 modelos) ---
+            { id: 25, name: "Chronos Noir Special", price: 149, cat: "oferta", oldPrice: 299, desc: "Elegancia oscura, 50% descuento por tiempo limitado.", img: "https://images.unsplash.com/photo-1508685096489-7aac823bd3b8?q=80&w=400" },
+            { id: 26, name: "Aqua-Sport Diver", price: 299, cat: "oferta", oldPrice: 550, desc: "Resistente 200m, bisel giratorio, movimiento japonés.", img: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=400" },
+            { id: 27, name: "Urban Minimalist Gold", price: 89, cat: "oferta", oldPrice: 180, desc: "Diseño ultra-fino chapado en oro, esfera limpia.", img: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?q=80&w=400" },
+            { id: 28, name: "Solar-Charge Adventure", price: 120, cat: "oferta", oldPrice: 250, desc: "Carga solar, ideal para exteriores, oferta flash.", img: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?q=80&w=400" },
+            { id: 29, name: "Hybrid Tech Watch", price: 210, cat: "oferta", oldPrice: 420, desc: "Notificaciones inteligentes, batería de larga duración.", img: "https://images.unsplash.com/photo-1508685096489-7aac823bd3b8?q=80&w=400" },
+            { id: 30, name: "Classic Roman Dial", price: 199, cat: "oferta", oldPrice: 380, desc: "Atemporal, correa de cuero marrón, gran descuento.", img: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?q=80&w=400" },
+            { id: 31, name: "Stealth Black Edition", price: 175, cat: "oferta", oldPrice: 350, desc: "PVD negro, deportivo, oferta exclusiva online.", img: "https://images.unsplash.com/photo-1611095973362-88e8e2557e58?q=80&w=400" },
+            { id: 32, name: "Rose Gold Quartz", price: 99, cat: "oferta", oldPrice: 220, desc: "Elegancia femenina en oro rosa, liquidación.", img: "https://images.unsplash.com/photo-1612817159949-180bbc455799?q=80&w=400" },
+            { id: 33, name: "Field Force Military", price: 145, cat: "oferta", oldPrice: 290, desc: "Resistente, correa de NATO, 50% descuento.", img: "https://images.unsplash.com/photo-1509048196583-1d07c0f1b635?q=80&w=400" },
+            { id: 34, name: "Azure Blue Chrono", price: 250, cat: "oferta", oldPrice: 480, desc: "Cronógrafo deportivo azul, precio reducido.", img: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=400" },
+            { id: 35, name: "Titanium X-1 Pro", price: 399, cat: "oferta", oldPrice: 750, desc: "Caja de titanio ligero, liquidación de stock.", img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b92ad?q=80&w=400" },
+            { id: 36, name: "Diamond Accent Watch", price: 499, cat: "oferta", oldPrice: 950, desc: "Pequeños diamantes en dial, elegancia a buen precio.", img: "https://images.unsplash.com/photo-1639148719213-9a4f4d547f4f?q=80&w=400" },
+            { id: 37, name: "Skeleton Mechanical", price: 350, cat: "oferta", oldPrice: 680, desc: "Movimiento visto, oferta especial fin de temporada.", img: "https://images.unsplash.com/photo-1639148719213-9a4f4d547f4f?q=80&w=400" },
+            { id: 38, name: "Vintage Quartz Classic", price: 79, cat: "oferta", oldPrice: 160, desc: "Diseño retro, correa de cuero negra, liquidación.", img: "https://images.unsplash.com/photo-1526045437500-205d15a31a54?q=80&w=400" },
+            { id: 39, name: "Deep Sea Master", price: 599, cat: "oferta", oldPrice: 1100, desc: "Diver profesional, última unidad en oferta.", img: "https://images.unsplash.com/photo-1619231641324-a21c43152668?q=80&w=400" },
+
+            // --- LIMITADA (12 modelos) ---
+            { id: 40, name: "Titanium X-1 Phoenix", price: 2100, cat: "limitada", desc: "Solo 100 unidades en todo el mundo, grabado Phoenix.", img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b92ad?q=80&w=400" },
+            { id: 41, name: "Skeleton Black Edition", price: 3500, cat: "limitada", desc: "Movimiento visto con tratamiento PVD negro total.", img: "https://images.unsplash.com/photo-1639148719213-9a4f4d547f4f?q=80&w=400" },
+            { id: 42, name: "Luna-Phase Stellar", price: 2800, cat: "limitada", desc: "Edición especial con fragmentos de meteorito en el dial.", img: "https://images.unsplash.com/photo-1614115167098-904c9977874a?q=80&w=400" },
+            { id: 43, name: "Rose Gold Chronos Limited", price: 4200, cat: "limitada", desc: "Solo 250 piezas, cronógrafo automático de precisión suiza.", img: "https://images.unsplash.com/photo-1612817159949-180bbc455799?q=80&w=400" },
+            { id: 44, name: "Deep Sea Commando", price: 2500, cat: "limitada", desc: "Diver militar conmemorativo, sumergible 1000m.", img: "https://images.unsplash.com/photo-1619231641324-a21c43152668?q=80&w=400" },
+            { id: 45, name: "Galactic Starwheel Limited", price: 5500, cat: "limitada", desc: "Diseño orbital único, numeración individual en caja.", img: "https://images.unsplash.com/photo-1639148719213-9a4f4d547f4f?q=80&w=400" },
+            { id: 46, name: "Heritage Aviator 1940", price: 1950, cat: "limitada", desc: "Réplica exacta del modelo original de aviación de 1940.", img: "https://images.unsplash.com/photo-1524805611974-575be7b7e3c5?q=80&w=400" },
+            { id: 47, name: "Azure Blue Perpetual Ed.", price: 3900, cat: "limitada", desc: "Calendario perpetuo en edición especial azul zafiro.", img: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=400" },
+            { id: 48, name: "Obsidian Deep Diver Ltd.", price: 2999, cat: "limitada", desc: "Caja de cerámica negra de alta tecnología, 300 unidades.", img: "https://images.unsplash.com/photo-1619231641324-a21c43152668?q=80&w=400" },
+            { id: 49, name: "Racing Spirit GT Carbon", price: 2300, cat: "limitada", desc: "Fibra de carbono real, correa de Alcántara, numerado.", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=400" },
+            { id: 50, name: "Vintage Gold Heritage Ltd.", price: 4800, cat: "limitada", desc: "Oro rosa cepillado, movimiento histórico certificado.", img: "https://images.unsplash.com/photo-1526045437500-205d15a31a54?q=80&w=400" },
+            { id: 51, name: "Classic Roman Dial Plat.", price: 6500, cat: "limitada", desc: "Caja de platino pulido, esfera blanca esmaltada.", img: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?q=80&w=400" },
+
+            // --- COMEDIA (12 modelos) ---
+            { id: 52, name: "Reloj de Arena Digital", price: 15, cat: "comedia", desc: "¡Cuidado! Solo funciona si lo das vuelta cada minuto.", img: "https://images.unsplash.com/photo-1587836374828-4dbafa94f0e0?q=80&w=400" },
+            { id: 53, name: "Reloj 'Llegas Tarde'", price: 5, cat: "comedia", desc: "No tiene manecillas, siempre marca 'TARDE'.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+            { id: 54, name: "Reloj 'Pizza-Time'", price: 10, cat: "comedia", desc: "La manecilla es una porción de pizza, ideal para amantes de la comida.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+            { id: 55, name: "Reloj 'Solo Quedan 5'", price: 20, cat: "comedia", desc: "Siempre marca 5 minutos más de la hora real, para no llegar tarde.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+            { id: 56, name: "Reloj 'Invisible'", price: 0, cat: "comedia", desc: "Tan exclusivo que no existe, ideal para minimalistas.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+            { id: 57, name: "Reloj 'Espera...'", price: 12, cat: "comedia", desc: "La manecilla del segundero gira hacia atrás de forma aleatoria.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+            { id: 58, name: "Reloj 'Café-Addict'", price: 8, cat: "comedia", desc: "El dial cambia de color según la cantidad de cafeína que has tomado.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+            { id: 59, name: "Reloj 'Día-Libre'", price: 18, cat: "comedia", desc: "Siempre marca el día actual como tu día libre, para motivarte.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+            { id: 60, name: "Reloj 'Espejo'", price: 25, cat: "comedia", desc: "Mírate a ti mismo en lugar de la hora, ideal para narcisistas.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+            { id: 61, name: "Reloj 'Adivina...'", price: 3, cat: "comedia", desc: "La hora se muestra en código morse aleatorio, para adivinar.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+            { id: 62, name: "Reloj 'No Lo Toques'", price: 30, cat: "comedia", desc: "El dial emite una pequeña descarga eléctrica si intentas tocarlo.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+            { id: 63, name: "Reloj 'Sonríe'", price: 14, cat: "comedia", desc: "Siempre muestra una cara sonriente en lugar de la hora, para alegrarte.", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400" },
+        ];
+
+        // Diccionario de cabeceras de categoría
+        const categoryContent = {
+            all: { title: "Catálogo Global Completo", desc: "Explora nuestra colección de vanguardia de más de 60 modelos." },
+            novedades: { title: "Últimas Adquisiciones", desc: "Las innovaciones más recientes de la relojería mundial, recién llegadas." },
+            exclusivo: { title: "Alta Relojería y Lujo", desc: "Piezas maestras elaboradas con los materiales más nobles para la élite." },
+            limitada: { title: "Ediciones de Coleccionista", desc: "Inversiones únicas. Series numeradas de bajísima producción global." },
+            oferta: { title: "Grandes Descuentos Corporativos", desc: "Oportunidades únicas de adquisición con precios reducidos hasta un 60%." },
+            comedia: { title: "Monterrox Humor Lab", desc: "Nuestra división de vanguardia... bueno, es para reírse un rato." }
+        };
+
+        // Función masiva para renderizar productos
+        function display(list) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = list.map(w => {
+                const oldPriceHtml = w.oldPrice ? `<span class="old-price">${w.oldPrice} €</span>` : '';
+                return `
+                    <div class="card">
+                        <span class="cat-tag ${w.cat}">${w.cat.toUpperCase()}</span>
+                        <div class="card-img-container">
+                            <img src="${w.img}" alt="${w.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400'; this.closest('.card').querySelector('.desc').innerHTML='Error al cargar imagen. Mostrando imagen de broma.'">
+                        </div>
+                        <div class="card-info">
+                            <h3>${w.name}</h3>
+                            <p class="desc">${w.desc}</p>
+                            <div class="price-container">
+                                ${oldPriceHtml}
+                                <div class="price">${w.price} €</div>
+                            </div>
+                            <button class="card-btn" onclick="alert('Monterrox Global: Su solicitud de adquisición para el modelo ${w.name} ha sido enviada a nuestro departamento de ventas internacionales.')">Adquirir</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
 
-        function render(list) {
-            document.getElementById('grid').innerHTML = list.map(w => `
-                <div class="card">
-                    <img src="https://picsum.photos/seed/${w.id}/400/400" alt="Reloj">
-                    <h4 style="margin: 10px 0;">${w.name}</h4>
-                    <button class="btn-detalles" onclick="openModal(${w.id})">DETALLES</button>
-                </div>
-            `).join('');
+        // Función corporativa de filtrado y actualización de cabeceras
+        function filterWatches(cat) {
+            // Actualizar estado activo en navegación
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.querySelector(`nav button[onclick*="${cat}"]`).classList.add('active');
+
+            // Actualizar cabecera de categoría
+            const content = categoryContent[cat] || categoryContent.all;
+            document.getElementById('category-title').innerText = content.title;
+            document.getElementById('category-desc').innerText = content.desc;
+
+            // Filtrar y mostrar
+            if (cat === 'all') return display(watches);
+            display(watches.filter(w => w.cat === cat));
         }
 
-        function filter(cat) {
-            render(watches.filter(w => w.cat === cat));
-        }
-
-        function openModal(id) {
-            const w = watches.find(item => item.id === id);
-            document.getElementById('m-title').innerText = w.name;
-            document.getElementById('m-desc').innerText = w.desc;
-            document.getElementById('m-features').innerHTML = w.features.map(f => `<li>${f}</li>`).join('');
-            document.getElementById('modal').style.display = 'flex';
-        }
-
-        function closeModal() { document.getElementById('modal').style.display = 'none'; }
-
-        // Carga inicial
-        render(watches);
+        // Inicializar vista masiva completa
+        filterWatches('all');
     </script>
 </body>
 </html>
