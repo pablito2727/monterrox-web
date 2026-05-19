@@ -46,7 +46,6 @@
     </div>
 
     <script>
-        // URLs de imágenes reales de relojes (Unsplash de alta calidad)
         const watchImages = [
             "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=400",
             "https://images.unsplash.com/photo-1524805611974-575be7b7e3c5?q=80&w=400",
@@ -58,7 +57,7 @@
         const watches = [];
         const cats = ['novedades', 'exclusivo', 'limitada', 'oferta', 'comedia'];
         
-        // Generador de 75 relojes (15 por cada categoría)
+       
         cats.forEach(cat => {
             for(let i = 1; i <= 15; i++) {
                 let name = `${cat.charAt(0).toUpperCase() + cat.slice(1)} Modelo ${i}`;
